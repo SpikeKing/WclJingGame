@@ -11,13 +11,13 @@ var {
   Component
   } = React;
 
+var BoardView = require('./boardview.js');
+
 class Main extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.tile}>
-          <Text style={styles.letter}>A</Text>
-        </View>
+          <BoardView/>
       </View>
     );
   }
