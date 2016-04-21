@@ -10,6 +10,8 @@ var {
   Text,
   View,
   TouchableOpacity,
+  Animated,
+  Easing,
   Component
   } = React;
 
@@ -22,6 +24,26 @@ var TILE_SIZE = CELL_SIZE - CELL_PADDING * 2;
 var LETTER_SIZE = Math.floor(TILE_SIZE * .75);
 
 class BoardView extends Component {
+//var BoardView = React.createClass({
+
+  constructor(props) {
+    super(props);
+    var tilt = new Array(SIZE * SIZE);
+    for (var i = 0; i < tilt.length; i++) {
+      tilt[i] = new Animated.Value(0);
+    }
+    this.state = {tilt};
+  }
+
+
+//con() {
+//  var tilt = new Array(SIZE * SIZE);
+//  for (var i = 0; i < tilt.length; i++) {
+//    tilt[i] = new Animated.Value(0);
+//  }
+//  return {tilt};
+//}
+
   render() {
     return (
       <View style={styles.container}>
@@ -36,9 +58,15 @@ class BoardView extends Component {
       for (var col = 0; col < SIZE; col++) {
         var key = row * SIZE + col;
         var letter = String.fromCharCode(65 + key);
+        var tilt = this.state.tilt[key].interpolate({
+          inputRange: [0, 1],
+          outputRange: ['0deg', '-30deg']
+        });
         var position = {
           left: col * CELL_SIZE + CELL_PADDING,
-          top: row * CELL_SIZE + CELL_PADDING
+          top: row * CELL_SIZE + CELL_PADDING,
+          transform: [{perspective: CELL_SIZE * 8},
+            {rotateX: tilt}]
         };
         result.push(this.renderTile(key, position, letter));
       }
@@ -48,19 +76,27 @@ class BoardView extends Component {
 
   renderTile(id, position, letter) {
     return (
-      <TouchableOpacity
+      //<TouchableOpacity
+      <Animated.View
         key={id}
-        onPress={() => this.clickTile(id)}>
-        <View style={[styles.tile, position]}>
-          <Text style={styles.letter}>{letter}</Text>
-        </View>
-      </TouchableOpacity>
+        style={[styles.tile, position]}
+        onStartShouldSetResponder={() => this.clickTile(id)}>
+        <Text style={styles.letter}>{letter}</Text>
+      </Animated.View>
+      //</TouchableOpacity>
     );
   }
 
   clickTile(id) {
     //alert(id);
     console.log(id);
+    var tilt = this.state.tilt[id];
+    tilt.setValue(1);
+    Animated.timing(tilt, {
+      toValue: 0,
+      duration: 250,
+      easing: Easing.quad
+    }).start();
   }
 }
 
