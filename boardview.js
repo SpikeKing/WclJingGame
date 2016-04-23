@@ -24,7 +24,6 @@ var TILE_SIZE = CELL_SIZE - CELL_PADDING * 2;
 var LETTER_SIZE = Math.floor(TILE_SIZE * .75);
 
 class BoardView extends Component {
-//var BoardView = React.createClass({
 
   constructor(props) {
     super(props);
@@ -34,15 +33,6 @@ class BoardView extends Component {
     }
     this.state = {tilt};
   }
-
-
-//con() {
-//  var tilt = new Array(SIZE * SIZE);
-//  for (var i = 0; i < tilt.length; i++) {
-//    tilt[i] = new Animated.Value(0);
-//  }
-//  return {tilt};
-//}
 
   render() {
     return (
