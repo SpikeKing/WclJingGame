@@ -15,13 +15,17 @@ var {
   Component
   } = React;
 
+// 屏幕的长宽
 var {width, height} = require('Dimensions').get('window');
-var SIZE = 4;
-var CELL_SIZE = Math.floor(width * .2);
-var CELL_PADDING = Math.floor(CELL_SIZE * .05);
-var BORDER_RADIUS = CELL_PADDING * 2;
-var TILE_SIZE = CELL_SIZE - CELL_PADDING * 2;
-var LETTER_SIZE = Math.floor(TILE_SIZE * .75);
+
+var SIZE = 4; // 每行四个
+
+var CELL_SIZE = Math.floor(width * .2); // 每个单元格占1/5
+var CELL_PADDING = Math.floor(CELL_SIZE * .05); // 间距是单元格1/20
+var BORDER_RADIUS = CELL_PADDING * 2; // 圆角为1/10
+
+var TILE_SIZE = CELL_SIZE - CELL_PADDING * 2; // 单元格的实际显示宽度
+var LETTER_SIZE = Math.floor(TILE_SIZE * .75); // 字体大小是宽度的3/4
 
 class BoardView extends Component {
 

@@ -11,8 +11,10 @@ var {
   Component
   } = React;
 
+// 网格页
 var BoardView = require('./boardview.js');
 
+// 主页
 class Main extends Component {
   render() {
     return (
@@ -29,18 +31,6 @@ var styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#644B62'
-  },
-  tile: {
-    width: 100,
-    height: 100,
-    borderRadius: 8,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#BEE1D2'
-  },
-  letter: {
-    color: '#333333',
-    fontSize: 80
   }
 });
 
